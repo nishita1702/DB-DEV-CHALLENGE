@@ -1,0 +1,70 @@
+<html>
+<head>
+    <!--
+    This is the library that provides websocket streaming pub/sub
+    The dev serverver is serving the html and javascript, but it also provides updating fx data on /fx/prices.
+     -->
+    <script src="stomp.js"></script>
+    <script src="sparkline.js"></script>
+    
+</head>
+<body>
+
+    <table id = "table">
+        <thead id = "table-heading">
+            <tr>
+                <th>name</th>
+                <th>bestBid</th>
+                <th>bestAsk</th>
+                <th>openBid</th>
+                <th>openAsk</th>
+                <th>lastChangeAsk</th>
+                <th>lastChangeBid</th>
+                <th>sparkLine</th>
+            </tr>
+        </thead>
+        <tbody id = "table-body">
+
+        </tbody>
+
+    </table>
+
+    <ul>
+        <li>I have created an array, which stores data that we receive that is unique on the basis of name and stores sorted data on the basis of lastChangeBid</li>
+        <li>I have added some new keys to the object that we receive which makes it easier to draw sparklines.</li>
+        <li>My new object looks like
+            
+            <div>{</div>   
+            <div>bestAsk: 107.06927327350213</div>
+            <div>bestBid: 104.42243895012497</div>
+            <div>lastChangeAsk: -2.5173362005239994</div>
+            <div>lastChangeBid: -5.032828991285811</div>
+            <div>midprice: 105.74585611181355  //stores midprice for this object</div>
+            <div>milliseconds: 1631472184000   // stores time in milliseconds</div>
+            <div>name: "usdjpy"</div>
+            <div>openAsk: 109.95984253582014</div>
+            <div>openBid: 107.05015746417985</div>
+            <div>sparklineData: (5) [{milliseconds1: 1631472164000, midprice1: 111.23201335269555}, {…}, {…}, {…}, {…}]  // stores data for the previously received updates within a interval of 30 seconds </div>
+            <div>}</div>  
+
+            <li>Whenever we receive the new data object, we update sparklineData with records for only last 30 seconds and use that to draw sparkline.</li>
+        
+    </ul>
+
+<!-- This is a description of what you should do for this task.  You can remove it for your answer -->
+<section class="content">
+    <p>
+        You should zip the project with a password of 'bauhaus'.  I will unzip it, go into the resulting folder,
+        run <code>npm start</code>, navigate to <code>http://localhost:8011/</code> and see the result.
+        I don't mind running <code>npm install</code> first, so you can remove the node_modules folder.
+        I will be testing in a recent version of chrome, so there's no need to do extra cross browser testing, but I
+        may use a mac or windows to do this, so you shouldn't include anything excessively platform specific.
+    </p>
+</section>
+
+<!-- Code you write in index.js and anything it depends on will be bundled into bundle.js and
+     is included here -->
+<script src="bundle.js"></script>
+
+</body>
+</html>
