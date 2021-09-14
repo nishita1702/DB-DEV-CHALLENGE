@@ -76,7 +76,6 @@ class calculateData{
 
     // To render this.data array to the screen.
     renderData(){
-        console.log(this.data);
         const table = document.getElementById('table-body'); 
         table.innerHTML = '';
         this.data.forEach((e, i) => {
