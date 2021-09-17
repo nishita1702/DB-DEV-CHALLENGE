@@ -12,7 +12,7 @@ const dataObj = {
 })
 };  
 
-describe("table", () => {
+describe("table class", () => {
     let tableObj;
     beforeEach(() => {
       tableObj = new Table();
@@ -23,7 +23,7 @@ describe("table", () => {
       jest.spyOn(tableObj, 'getPrevSparklineData');
       jest.spyOn(tableObj, 'filterSparkLineData');
     });
-    test("validate adding data", () => {
+    test("addData function", () => {
       tableObj.addData(dataObj);
       expect(tableObj.data[0].name).toBe('usdjpy');
       expect(tableObj.renderData).toHaveBeenCalled();
@@ -32,5 +32,25 @@ describe("table", () => {
       expect(tableObj.getPrevSparklineData).toHaveBeenCalled();
       tableObj.addData(dataObj); //adding more data
     });
+    test("removeExistingDataObj function", () => {
+      tableObj.data = [{name: "test1"}, {name: "test2"}];
+      tableObj.data = tableObj.removeExistingDataObj({name: "test2"});
+      expect(tableObj.data).toHaveLength(1);
+      // it will not filter if name doesnt exists in array
+      tableObj.data = tableObj.removeExistingDataObj({name: "test2"});
+      expect(tableObj.data).toHaveLength(1);
+    });
+    test("getPrevSparklineData function", () => {
+      const sparklineData = [1,2,3];
+      tableObj.data = [{name: "test1", sparklineData}];
+      let prevSparkLine = tableObj.getPrevSparklineData({name: "test1", sparklineData});
+      expect(prevSparkLine).toEqual(sparklineData);
+      // it should return empty array if name doesnot exist
+      prevSparkLine = tableObj.getPrevSparklineData({name: "test2"});
+      expect(prevSparkLine).toEqual([]);
+    });
+    test("getSparklines function", () => {
+      const sparkLines = tableObj.getSparklines([{midprice1: 1}, {midprice1: 2}, {midprice1: 3}]);
+      expect(sparkLines).toEqual([1,2,3]);
+    });
 });
-  

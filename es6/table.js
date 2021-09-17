@@ -40,18 +40,18 @@ class calculateData{
 
     // To  replace the record with the updated data assuming the name is unique
     removeExistingDataObj(data) {
-        return this.data.filter((e) => {
-            return e.name !== data.name;
+        return this.data.filter((obj) => {
+            return obj.name !== data.name;
         }); 
     }
 
     // To keep record of midprice for last 30 seconds
     getPrevSparklineData(data) {
-        var p = this.data.filter((e) => {
-            return e.name === data.name;
+        var existingObj = this.data.filter((obj) => {
+            return obj.name === data.name;
         }); 
-        if(p.length !== 0){
-            return p[0].sparklineData;
+        if(existingObj.length !== 0){
+            return existingObj[0].sparklineData;
         }else {
             return [];
         }
@@ -60,8 +60,8 @@ class calculateData{
 
      //To remove midprice data of records which are not within 30 sec
     filterSparkLineData(totalSparklineData, interval) {
-        return totalSparklineData.filter((e) => {
-            return e.milliseconds1 > interval;
+        return totalSparklineData.filter((obj) => {
+            return obj.milliseconds1 > interval;
         })
         
     }
