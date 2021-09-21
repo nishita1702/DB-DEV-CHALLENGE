@@ -16,7 +16,7 @@ class calculateData{
 
         const prevSparklineData = this.getPrevSparklineData(newData);
         const interval = milliseconds - 30000;
-        var obj = {
+        const obj = {
             milliseconds1: milliseconds,
             midprice1: newData.midprice
         }
@@ -47,7 +47,7 @@ class calculateData{
 
     // To keep record of midprice for last 30 seconds
     getPrevSparklineData(data) {
-        var existingObj = this.data.filter((obj) => {
+        const existingObj = this.data.filter((obj) => {
             return obj.name === data.name;
         }); 
         if(existingObj.length !== 0){
@@ -79,7 +79,7 @@ class calculateData{
         const table = document.getElementById('table-body'); 
         table.innerHTML = '';
         this.data.forEach((e, i) => {
-            var tableRow = document.createElement("tr");
+            const tableRow = document.createElement("tr");
             tableRow.setAttribute("id", `table-data-${i}`);
             table.appendChild(tableRow);
 
@@ -100,8 +100,8 @@ class calculateData{
     }
 
     append(value, i) {
-        var node = document.createElement("td");
-        var textnode = document.createTextNode(value);
+        const node = document.createElement("td");
+        const textnode = document.createTextNode(value);
         node.appendChild(textnode);
         document.getElementById(`table-data-${i}`).appendChild(node);
     }
